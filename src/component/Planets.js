@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useQuery} from 'react-query';
+import {usePaginatedQuery, useQuery} from 'react-query';
 import Planet from './Planet';
 
 const fetchPlanets = async (key, page) => {
@@ -10,22 +10,26 @@ const fetchPlanets = async (key, page) => {
 
 const Planets = () => {
     const [pages, setPages] = useState(1);
-    const {data, status, error} = useQuery(['PlanetsAPI', pages], fetchPlanets, {
-    });
+    const {resolvedData, latestData, status} = usePaginatedQuery(['PlanetsAPI', pages], fetchPlanets);
 
     return (
-        <div>
-            <button onClick={() => setPages(1)}>Page 1</button>
-            <button onClick={() => setPages(2)}>Page 2</button>
-            <button onClick={() => setPages(3)}>Page 3</button>
-            
+        <div>            
             <h2>Planets</h2>
+            <button 
+                onClick={() => setPages(old => old == 1 ? old : old-1)}
+                disabled = {pages == 1 && true}
+            >Back</button>
+            <span>{pages}</span>
+            <button
+                onClick={() => setPages(old => latestData.next == null ? old : old+1 )}
+            >Next</button>
+            {console.log(resolvedData)}
             
             {status == 'loading' && <p>Loading...</p>}
             {status == 'error' && <p>Error!</p>}
             {status == 'success' && (
                 <div>
-                    {data.results.map((item, index) => {
+                    {resolvedData.results.map((item, index) => {
                         return <Planet planets={item} key={item.name} />
                     })}
                 </div>
