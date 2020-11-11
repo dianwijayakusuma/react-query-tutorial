@@ -6,11 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import Application from './component/Application';
 import { ReactQueryDevtools } from 'react-query-devtools'
 import Apps from './component2/apps';
+import Router from './component3/Route';
 
 ReactDOM.render(
   <React.StrictMode>
     <ReactQueryDevtools initialIsOpen={false} />
-    <Apps />
+    <Router />
   </React.StrictMode>,
   document.getElementById('root')
 );
