@@ -14,6 +14,21 @@ export async function FetchDataDetail(key, id) {
     return checkData;
 }
 
+export async function FetchDataUpdate(newData) {
+    const data = await axios({
+        url : `https://web-server-book-dicoding.appspot.com/edit/${newData.id}`,
+        method : "put",
+        headers : {
+            "Content-Type" : "application/x-www-form-urlencoded",
+            "Content-Type" : "application/json",
+            "X-Auth-Token" : "12345" 
+        },
+        data : newData
+    });
+    
+    return data;
+}
+
 function PostList(props) {
     const {isFetching, isError, isLoading, data, error} = useQuery('PostData', FetchDataList, {
         retry : 1,
