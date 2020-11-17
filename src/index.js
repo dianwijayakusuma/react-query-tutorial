@@ -7,16 +7,13 @@ import Application from './component/Application';
 import { ReactQueryDevtools } from 'react-query-devtools'
 import Apps from './component2/apps';
 import Router from './videoTutorial/component3/Route';
+import ApplicationBasic1 from './meTutorial/01_useQuery/01_basic/application';
+import ApplicationBasic2 from './meTutorial/01_useQuery/02_queryBergantung/application';
 
 ReactDOM.render(
   <React.StrictMode>
     <ReactQueryDevtools initialIsOpen={false} />
-    <Router />
+    <ApplicationBasic2 />
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
