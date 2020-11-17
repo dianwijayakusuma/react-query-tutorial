@@ -55,7 +55,7 @@ function DetailUser({detailUser}) {
         <>
 
             {detailUser.map(item => {
-                return <div key={item.id}>
+                return <div key={item.id} style={{color : 'yellow'}}>
                     <p>{item.name}</p>
                     <p>{item.username}</p>
                     <p>{item.website}</p>
