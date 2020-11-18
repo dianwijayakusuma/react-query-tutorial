@@ -35,12 +35,12 @@ function DetailPost(){
         initialStale : true
     })
 
-    if(postQueryDetail.isInitialData) return <p>{partText(postQueryDetail.data)}</p>;
-
     return(
         <Fragment>
             <h1>Hello word</h1>
-            <p>{postQueryDetail.data.body}</p>
+            {   postQueryDetail.isInitialData ? 
+                <p>{partText(postQueryDetail.data)}</p> : 
+                <p>{postQueryDetail.data.body}</p>}
         </Fragment>
     )
 }
