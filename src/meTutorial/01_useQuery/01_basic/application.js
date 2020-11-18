@@ -3,7 +3,6 @@ import { useQuery } from 'react-query'
 import axios from 'axios';
 
 async function FetchInfo(...res) {
-    console.log(res)
     const data = await axios.get('https://jsonplaceholder.typicode.com/posts');
     return data;
 } 
@@ -24,6 +23,7 @@ function ApplicationBasic1() {
 
     return(
         <Fragment>
+            {console.log(data)}
             {data.data.map(item => {
                 return <p key={item.id}> {item.id}. {item.title} <button onClick={() => setState(state+1)}>Klik</button> </p>
             })}

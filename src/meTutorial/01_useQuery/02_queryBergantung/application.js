@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import {useQuery} from 'react-query';
+import {useQuery, queryCache} from 'react-query';
 import axios from 'axios';
 
 async function getUserByEmail() {
@@ -24,14 +24,13 @@ function ApplicationBasic2() {
     // get detail user 
     const {data:detailUser} = useQuery(['detailUser', emailUser], getDetailUser, {
         refetchOnWindowFocus : false,
-        enabled : emailUser
+        enabled : emailUser,
     })
 
     if(isLoading) return <h4>Memuat...</h4>
 
     return(
         <Fragment>
-            {console.log(detailUser)}
 
             {data.data.map((item) => {
                 return (
