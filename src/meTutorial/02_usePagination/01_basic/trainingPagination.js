@@ -11,6 +11,7 @@ function TrainingPagination() {
     const [numPage, setNumPage] = useState(1);
     const {resolvedData, latestData, isInitialData} = usePaginatedQuery(['postData', numPage],fetchPlanet, {
         refetchOnWindowFocus : false,
+        staleTime : Infinity
     });
 
     return(

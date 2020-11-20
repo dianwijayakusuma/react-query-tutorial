@@ -12,11 +12,13 @@ import ApplicationBasic2 from './meTutorial/01_useQuery/02_queryBergantung/appli
 import ApplicationBasic3 from './meTutorial/01_useQuery/03_queryDelay&Retry/application';
 import AppTraining from './meTutorial/01_useQuery/04_initialData&initialStale/training';
 import TrainingPagination from './meTutorial/02_usePagination/01_basic/trainingPagination';
+import Trainings from './meTutorial/03_useInfinityQuery/trainings';
+import RouteApplication from './meTutorial/03_useInfinityQuery/route';
 
 ReactDOM.render(
   <React.StrictMode>
     <ReactQueryDevtools initialIsOpen={false} />
-    <TrainingPagination />
+    <RouteApplication />
   </React.StrictMode>,
   document.getElementById('root')
 );
