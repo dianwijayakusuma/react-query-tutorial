@@ -14,11 +14,12 @@ import AppTraining from './meTutorial/01_useQuery/04_initialData&initialStale/tr
 import TrainingPagination from './meTutorial/02_usePagination/01_basic/trainingPagination';
 import Trainings from './meTutorial/03_useInfinityQuery/trainings';
 import RouteApplication from './meTutorial/03_useInfinityQuery/route';
+import BasicMutation from './meTutorial/04_useMutation/application';
 
 ReactDOM.render(
   <React.StrictMode>
     <ReactQueryDevtools initialIsOpen={false} />
-    <ApplicationBasic2 />
+    <BasicMutation />
   </React.StrictMode>,
   document.getElementById('root')
 );
