@@ -18,7 +18,7 @@ import RouteApplication from './meTutorial/03_useInfinityQuery/route';
 ReactDOM.render(
   <React.StrictMode>
     <ReactQueryDevtools initialIsOpen={false} />
-    <RouteApplication />
+    <ApplicationBasic2 />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -8,13 +8,13 @@ async function getUserByEmail() {
 }
 
 async function getDetailUser(key, emailUser) {
+    console.log('fetch get detail user');
     const data = await axios.get('https://jsonplaceholder.typicode.com/users');
     return data.data.filter(item => item.email === emailUser ? item : false);
 }
 
 function ApplicationBasic2() {
     const [emailUser, setEmailUser] = useState(false);
-    const [idUser, setIdUser] = useState(0);
 
     // get user 
     const {data,isLoading} = useQuery('user', getUserByEmail, {
@@ -37,10 +37,9 @@ function ApplicationBasic2() {
                     <div key={item.id}>
                         <h5>{item.email} <button onClick={() => {
                             setEmailUser(item.email);
-                            setIdUser(item.id)
                         }}>Klik detail</button></h5>
 
-                        {idUser === item.id && detailUser && <DetailUser detailUser={detailUser} />}
+                        {emailUser === item.email && detailUser && <DetailUser detailUser={detailUser} />}
                     </div>
                 )
             })}
