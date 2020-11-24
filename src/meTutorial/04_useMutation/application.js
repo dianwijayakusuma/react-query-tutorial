@@ -5,7 +5,8 @@ import axios from 'axios';
 function BasicMutation() {
     const [state, setState ] = useState({id : 0, title : '', author : ''});
     const {data, isLoading, refetch} = useQuery('book' , async () => {
-        return await axios.get('https://web-server-book-dicoding.appspot.com/list');
+        const data = await axios.get('https://web-server-book-dicoding.appspot.com/list');
+        return data.data.books;
     }, {
         refetchOnWindowFocus : false
     });
@@ -24,12 +25,19 @@ function BasicMutation() {
 
         return data;
     }, {
-        onSuccess : (data) => {
-            queryCache.invalidateQueries('book');
+        onMutate:  (newData) => {
+            const snapshot = queryCache.getQueryData('book');
+            const findData = snapshot.find(item => item.id === parseInt(newData.id));
+            
+            if(!findData) queryCache.setQueryData('book', old => [...old, newData]);
+
+            return () => queryCache.setQueryData('book', snapshot);
         },
-        onError : (err) => {
-            alert(err)
-        }
+        onError : (err, newTodo, rollback) => {
+            console.log(newTodo);
+            rollback();
+        },
+        onSettled : () => queryCache.invalidateQueries('book')
     });
 
     const handleSubmit = (e) => {
@@ -48,7 +56,7 @@ function BasicMutation() {
 
     return(
         <Fragment>
-            {console.log(state)}
+            {/* {console.log(data)} */}
             <form onSubmit={handleSubmit}>
                 <input type="number" name={Object.keys(state)[0]} onChange={handleChange}/>
                 <input type="text" placeholder='masukan judul buku' name={Object.keys(state)[1]} onChange={handleChange} />
@@ -56,7 +64,7 @@ function BasicMutation() {
                 <button>{info.isLoading ? 'Send...' : 'Submit'}</button>
             </form>
 
-            {data.data.books.map(item => {
+            {data.map(item => {
                 return <h4 key={item.id}>{item.title}</h4>
             })}
         </Fragment>
