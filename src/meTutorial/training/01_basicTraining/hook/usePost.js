@@ -1,5 +1,5 @@
 import React from 'react';
-import {useQuery} from 'react-query';
+import {queryCache, useQuery} from 'react-query';
 import axios from 'axios';
 
 async function fetchListData() {
@@ -9,7 +9,7 @@ async function fetchListData() {
 
 function usePost() {
     return useQuery('data', fetchListData, {
-        refetchOnWindowFocus : false
+        refetchOnWindowFocus : false,
     })
 }
 

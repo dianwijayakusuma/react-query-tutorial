@@ -6,7 +6,7 @@ import useDetailPost from '../hook/useDetailPost';
 
 function AppTraining1() {
     return(
-        <BrowserRouter>
+        <BrowserRouter forceRefresh={false}>
             <Switch>
                 <Route path='/' exact component={ListData} />
                 <Route path='/detail/:id' exact component={DetailList} />
@@ -15,22 +15,27 @@ function AppTraining1() {
     )
 }
 
-function ListData() {
+function ListData(params) {
     const history = useHistory();
-    const {data:ListData, isLoading} = usePost();
+    const {data:ListData, isLoading, isFetching} = usePost();
 
-    if(isLoading) return null;
+    if(isLoading) return <h2>loading</h2>;
 
     return(
         <Fragment>
+            {isFetching && console.log('fetching')}
             {ListData.map(item => {
                 return( 
                     <li key={item.id}>
                         <a  
-                            onClick={() => history.push(`/detail/${item.id}`)}
+                            onClick={() => {
+                                history.push(`/detail/${item.id}`);
+                            }}
+                            style={{color : queryCache.getQueryData(['detailPost', item.id]) ? 'green' : 'white'}}
                         >{item.title}</a>
                     </li>)
             })}
+
         </Fragment>
     )
 }
@@ -40,21 +45,20 @@ function DetailList(props) {
     const {data:DetailPost, isSuccess, isLoading, isInitialData} = useDetailPost('detailPost', parseInt(param.id));
 
     if(isLoading) return null;
-    if(isInitialData) console.log(DetailPost);
 
     return(
         <Fragment>
             {isInitialData ? 
-            <div className='card'>
-                <h2>{partText(DetailPost.title)}</h2>
-            </div> : 
-            <div className='card'>
-                <h2>{DetailPost.title}</h2>
-                <p>{DetailPost.body}</p>
-            </div>
+                <div className='card'>
+                    <h2>{partText(DetailPost.title)}</h2>
+                </div> : 
+                <div className='card'>
+                    <h2>{DetailPost.title}</h2>
+                    <p>{DetailPost.body}</p>
+                </div>
             }
 
-            <button onClick={() => props.history.replace('/')}>Back</button>
+            <button onClick={() => props.history.replace('/', [DetailPost.id])}>Back</button>
         </Fragment>
     )
 }
