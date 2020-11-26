@@ -9,7 +9,8 @@ async function fetchListData() {
 
 function usePost() {
     return useQuery('data', fetchListData, {
-        refetchOnWindowFocus : false,
+        // refetchOnWindowFocus : false,
+        // refetchInterval : 1000
     })
 }
 

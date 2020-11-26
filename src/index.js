@@ -16,11 +16,12 @@ import Trainings from './meTutorial/03_useInfinityQuery/trainings';
 import RouteApplication from './meTutorial/03_useInfinityQuery/route';
 import BasicMutation from './meTutorial/04_useMutation/application';
 import AppTraining1 from './meTutorial/training/01_basicTraining/component/application';
+import AppRefetchWindow from './meTutorial/training/02_refetchWindow/application';
 
 ReactDOM.render(
   <React.StrictMode>
     <ReactQueryDevtools initialIsOpen={false} />
-    <AppTraining1 />
+    <AppRefetchWindow />
   </React.StrictMode>,
   document.getElementById('root')
 );
