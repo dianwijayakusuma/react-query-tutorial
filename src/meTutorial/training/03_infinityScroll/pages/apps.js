@@ -14,7 +14,6 @@ function AppInfinityPage(){
             setNumbPage(num);
             setRangeData(pageData);
         }
-
     }
 
    const infiniteRef = useInfiniteScroll({
