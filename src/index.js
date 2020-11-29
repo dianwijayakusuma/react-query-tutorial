@@ -18,11 +18,12 @@ import BasicMutation from './meTutorial/04_useMutation/application';
 import AppTraining1 from './meTutorial/training/01_basicTraining/component/application';
 import AppRefetchWindow from './meTutorial/training/02_refetchWindow/application';
 import AppInfinityPage from './meTutorial/training/03_infinityScroll/pages/apps';
+import ApplicationUseQueryAPI from './meTutorial/training/04_UseQueryAPI/RoutingApp';
 
 ReactDOM.render(
   <React.StrictMode>
     <ReactQueryDevtools initialIsOpen={false} />
-    <AppInfinityPage />
+    <ApplicationUseQueryAPI />
   </React.StrictMode>,
   document.getElementById('root')
 );
