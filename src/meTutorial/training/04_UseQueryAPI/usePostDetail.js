@@ -12,7 +12,6 @@ function GetDetailPost(key, id){
 function usePostDetail(key, id) {
     return useQuery([key, id], GetDetailPost, {
         refetchOnWindowFocus : false,
-        retry : 1,
         enabled : id
     })
 }
