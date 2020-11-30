@@ -1,5 +1,6 @@
-import React, { Fragment, useState } from 'react';
-import {useQuery, useMutation, queryCache} from 'react-query';
+import React, { Fragment, useContext, useState } from 'react';
+import {useQuery, useMutation, queryCache, ReactQueryCacheProvider} from 'react-query';
+import {ErrorBoundary} from 'react-error-boundary';
 import axios from 'axios';
 
 function BasicMutation() {
@@ -10,6 +11,8 @@ function BasicMutation() {
     }, {
         refetchOnWindowFocus : false
     });
+
+    console.log(queryCache);
 
     const [mutate, info] = useMutation(async (newData) => {
         const data = await axios({
@@ -34,10 +37,9 @@ function BasicMutation() {
             return () => queryCache.setQueryData('book', snapshot);
         },
         onError : (err, newTodo, rollback) => {
-            console.log(newTodo);
             rollback();
         },
-        onSettled : () => queryCache.invalidateQueries('book')
+        onSettled : () => queryCache.invalidateQueries('book', {refetchActive : true})
     });
 
     const handleSubmit = (e) => {
@@ -56,18 +58,37 @@ function BasicMutation() {
 
     return(
         <Fragment>
-            {/* {console.log(data)} */}
-            <form onSubmit={handleSubmit}>
-                <input type="number" name={Object.keys(state)[0]} onChange={handleChange}/>
-                <input type="text" placeholder='masukan judul buku' name={Object.keys(state)[1]} onChange={handleChange} />
-                <input type="text" placeholder='masukan body buku' name={Object.keys(state)[2]} onChange={handleChange}/>
-                <button>{info.isLoading ? 'Send...' : 'Submit'}</button>
-            </form>
+                <form onSubmit={handleSubmit}>
+                    <input type="number" name={Object.keys(state)[0]} onChange={handleChange}/>
+                    <input type="text" placeholder='masukan judul buku' name={Object.keys(state)[1]} onChange={handleChange} />
+                    <input type="text" placeholder='masukan body buku' name={Object.keys(state)[2]} onChange={handleChange}/>
+                    <button>{info.isLoading ? 'Send...' : 'Submit'}</button>
+                </form>
 
-            {data.map(item => {
+            <ErrorBoundary FallbackComponent={FallbackError}>
+                <Data param={data}/>
+            </ErrorBoundary>
+        </Fragment>
+    )
+}
+
+function Data({param}) {
+    return(
+        <>
+        {console.log(param)}
+            {param.map(item => {
                 return <h4 key={item.id}>{item.title}</h4>
             })}
-        </Fragment>
+        </>
+    )
+}
+
+function FallbackError(err) {
+    return(
+        <>
+            {console.log(err)}
+            <h2>Oh no, something wrong!</h2>
+        </>
     )
 }
 

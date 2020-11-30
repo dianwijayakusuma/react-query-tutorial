@@ -19,11 +19,16 @@ import AppTraining1 from './meTutorial/training/01_basicTraining/component/appli
 import AppRefetchWindow from './meTutorial/training/02_refetchWindow/application';
 import AppInfinityPage from './meTutorial/training/03_infinityScroll/pages/apps';
 import ApplicationUseQueryAPI from './meTutorial/training/04_UseQueryAPI/RoutingApp';
+import { QueryCache, ReactQueryCacheProvider } from 'react-query';
+
+const queryCache = new QueryCache();
 
 ReactDOM.render(
   <React.StrictMode>
-    <ReactQueryDevtools initialIsOpen={false} />
-    <ApplicationUseQueryAPI />
+    <ReactQueryCacheProvider queryCache={queryCache}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <BasicMutation />
+    </ReactQueryCacheProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
