@@ -37,12 +37,13 @@ button:hover{
   background: #1b1b1b;
   margin: 16px 0;
   border-radius: 20px;
+  cursor: pointer;
 }
 .card p{
   margin: 6px 0;
   color: #999;
 }
-.card h3{
+.card h2{
   margin: 10px 0;
-  color: #ffff57;
+  color: #66d463;
 }
