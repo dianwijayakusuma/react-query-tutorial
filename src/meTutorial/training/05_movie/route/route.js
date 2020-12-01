@@ -15,14 +15,12 @@ function RouteApp() {
                 <Route path='/' exact>
                     <Home/>                    
                 </Route>
-                <Route path='/film'>
+                <Route path='/film' exact>
                     <Film/>
                 </Route>
-                <Route strict path='/film/:id' render={({location}) => {
-                    return <DetailFilm/>
-                }} />
+                <Route path='/film/:id' component={DetailFilm}/>
 
-                <Route component={Error_Page} />
+                <Route path='/error' component={Error_Page} />
             </Switch>
         </BrowserRouter>
     )

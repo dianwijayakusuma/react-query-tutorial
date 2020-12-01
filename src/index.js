@@ -26,10 +26,8 @@ const queryCache = new QueryCache();
 
 ReactDOM.render(
   <React.StrictMode>
-    <ReactQueryCacheProvider queryCache={queryCache}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <ApplicationMovie />
-    </ReactQueryCacheProvider>
+    <ReactQueryDevtools initialIsOpen={false} />
+    <ApplicationMovie />
   </React.StrictMode>,
   document.getElementById('root')
 );

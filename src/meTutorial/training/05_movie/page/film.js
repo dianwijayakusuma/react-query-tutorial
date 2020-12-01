@@ -8,7 +8,6 @@ import Search_Film from '../component/searchFilm';
 function Film() {
     const [searchValue, setSearchValue] = useState(null);
     const {register, handleSubmit} = useForm();
-    const {data:dataDefaultFilm, isLoading:loadingDefaultFilm} = useFilms('defaultFilm', 'superman');
     const {data:dataSearchFilm, isLoading:loadingSearchFilm} = useFilms('searchFilm', searchValue);
     const onSubmit = data => setSearchValue(data.data);
 
@@ -16,19 +15,14 @@ function Film() {
 
     return(
         <Fragment>
-            {loadingDefaultFilm ? 
-                <Load/> : 
-                <>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <input type="text" name='data' ref={register}/>
-                        <button type='submit'>Cari Film</button>
-                    </form>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <input type="text" name='data' defaultValue={searchValue} ref={register}/>
+                <button type='submit'>Cari Film</button>
+            </form>
 
-                    {dataSearchFilm != 'Film not found' && <Search_Film film={dataSearchFilm} />}         
+            {dataSearchFilm != 'Film not found' && <Search_Film film={dataSearchFilm} />}         
 
-                    <Default_Film film={dataDefaultFilm} />
-                </>
-            }
+            <Default_Film />
         </Fragment>
     )
 }

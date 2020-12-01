@@ -1,5 +1,5 @@
 import React from 'react';
-import {useQuery} from 'react-query';
+import {queryCache, useQuery} from 'react-query';
 
  function GetDataPost() {
     return fetch('https://jsonplaceholder.typicode.com/posts')
@@ -11,7 +11,7 @@ import {useQuery} from 'react-query';
 
 function usePost(key) {
     return useQuery(key, GetDataPost, {
-        refetchOnWindowFocus : false,
+        refetchOnWindowFocus : false
     })
 }
 

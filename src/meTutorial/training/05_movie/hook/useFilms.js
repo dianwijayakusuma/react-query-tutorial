@@ -13,8 +13,12 @@ function fetchData(_, titleMovie){
 function useFilms(key, titleMovie) {
     return useQuery([key, titleMovie], fetchData, {
         refetchOnWindowFocus : false,
-        onError : (err) => {
-            queryCache.cancelQueries(key);
+        initialData : (data) => {
+            console.log(queryCache.setQueryData('searchFilm', 'naruto'));
+            console.log(queryCache.getQuery(['searchFilm']));
+        },
+        onSuccess : (data) => {
+            // console.log(queryCache.getQueryData(['defaultFilm', titleMovie]));
         }
     })
 }

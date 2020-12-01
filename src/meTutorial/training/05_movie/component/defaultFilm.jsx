@@ -1,11 +1,19 @@
 import React, { Fragment } from 'react';
+import useFilms from '../hook/useFilms';
 import Card_Film from './cardFilm';
+import Load from './loader';
 
-function Default_Film({film}) {
+function Default_Film() {
+    const {data:dataDefaultFilm, isLoading:loadingDefaultFilm} = useFilms('defaultFilm', 'superman');
+
     return(
         <Fragment>
-            <h1>Default Film</h1>
-            <Card_Film film={film} />
+            {loadingDefaultFilm ? null : 
+                <>
+                    <h1>Default Film</h1>
+                    <Card_Film film={dataDefaultFilm} />
+                </>
+            }
         </Fragment>
     )
 }
